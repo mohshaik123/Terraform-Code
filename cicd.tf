@@ -4,19 +4,19 @@ resource "aws_security_group" "cicd" {
   vpc_id      = "vpc-02b8d66a7707ed146"
 
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "TLS from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 8080
-    to_port          = 8080
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "TLS from VPC"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -33,13 +33,13 @@ resource "aws_security_group" "cicd" {
 }
 
 resource "aws_instance" "cicd" {
-  ami           = "ami-06489866022e12a14"
-  instance_type = "t2.micro"
-  subnet_id = "subnet-08ef2aa21129b2288"
-  vpc_security_group_ids =[aws_security_group.cicd.id]
-  iam_instance_profile = aws_iam_instance_profile.artifactory.name
-#   key_name = "testing-key"
-key_name = aws_key_pair.demo.id
+  ami                    = "ami-06489866022e12a14"
+  instance_type          = "t2.micro"
+  subnet_id              = "subnet-08ef2aa21129b2288"
+  vpc_security_group_ids = [aws_security_group.cicd.id]
+  iam_instance_profile   = aws_iam_instance_profile.artifactory.name
+  #   key_name = "testing-key"
+  key_name  = aws_key_pair.demo.id
   user_data = <<-EOF
               #!/bin/bash
               wget -O /etc/yum.repos.d/jenkins.repo \

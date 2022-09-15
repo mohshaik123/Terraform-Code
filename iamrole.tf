@@ -33,18 +33,18 @@ resource "aws_iam_policy" "artifactory" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:*",
-                "s3-object-lambda:*"
-            ],
-            "Resource": "*"
-        }
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:*",
+          "s3-object-lambda:*"
+        ],
+        "Resource" : "*"
+      }
     ]
-})
+  })
 }
 
 #attach policy
